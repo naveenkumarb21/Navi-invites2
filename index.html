@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#040a1c">
-  <title>Akash weds Lavanya · Wedding Invitation</title>
+  <title>Akash weds Harini · Wedding Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Josefin+Sans:wght@300;400;600;700&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
@@ -253,7 +253,6 @@
       backdrop-filter:blur(8px);
       pointer-events:none;
     }
-    /* timeline / event / info panels already have solid backgrounds */
     body.open .wrap > .timeline::before{display:none}
     body.open .wrap > .event::before,
     body.open .wrap > .event::after{display:none}
@@ -446,36 +445,67 @@
     .in .lightbar::after,.lightbar.in::after{animation:bar 2.2s ease-out 1s 1}
     @keyframes bar{0%{left:-30%;opacity:1}100%{left:120%;opacity:1}}
 
-    /* ===== HERO NAMES (single line, mobile-friendly heart) ===== */
+    /* ===== HERO NAMES (single line, refined heart) ===== */
     .hero-names{
-      display:flex;
+      display:inline-flex;
       align-items:center;
       justify-content:center;
       flex-wrap:nowrap;
-      gap:clamp(6px,2vw,18px);
+      gap:clamp(8px,2.2vw,22px);
       font-family:var(--script);
-      font-size:clamp(30px,9.5vw,140px);
-      line-height:1.05;
+      font-size:clamp(30px,9vw,132px);
+      line-height:1;
       white-space:nowrap;
+      vertical-align:middle;
     }
     .hero-names .nm{
       font-family:var(--script);
       display:inline-block;
-    }
-    .hero-names .hrt{
-      display:inline-grid;
-      place-items:center;
-      font-size:.55em;
       line-height:1;
-      transform:translateY(-.04em);
+    }
+    /* Heart now scaled & centered relative to name font size */
+    .hero-names .hrt{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       flex:0 0 auto;
+      width:0.62em;
+      height:0.62em;
+      color:var(--gold-2);
+      -webkit-text-fill-color:var(--gold-2);
+      transform:translateY(0.02em);
+      text-shadow:0 0 14px rgba(226,189,88,.6);
+      animation:heartPulse 2.6s ease-in-out infinite;
+    }
+    .hero-names .hrt svg{
+      width:100%;
+      height:100%;
+      display:block;
+      filter:drop-shadow(0 0 8px rgba(226,189,88,.6));
+    }
+    @keyframes heartPulse{
+      0%,100%{transform:translateY(0.02em) scale(1)}
+      50%{transform:translateY(0.02em) scale(1.08)}
     }
     @media(max-width:600px){
       .hero-names{
-        gap:clamp(4px,1.6vw,10px);
-        font-size:clamp(28px,9vw,54px);
+        gap:clamp(6px,1.8vw,12px);
+        font-size:clamp(26px,8.6vw,50px);
       }
-      .hero-names .hrt{font-size:.6em}
+      .hero-names .hrt{
+        width:0.6em;
+        height:0.6em;
+      }
+    }
+    @media(max-width:380px){
+      .hero-names{
+        gap:clamp(4px,1.4vw,8px);
+        font-size:clamp(22px,8.2vw,40px);
+      }
+      .hero-names .hrt{
+        width:0.58em;
+        height:0.58em;
+      }
     }
     /* ========================================================= */
 
@@ -531,7 +561,7 @@
         <div class="i-names gold n">
           <span>Akash</span>
           <small>weds</small>
-          <span>Lavanya</span>
+          <span>Harini</span>
         </div>
       </div>
       <div class="bot-half">
@@ -552,9 +582,9 @@
       <div class="wrap">
         <div class="big-names gold reveal" style="--d:0">
           <span class="lightbar hero-names">
-            <span class="nm">Akash</span>
-            <span class="hrt" style="color:var(--gold-2); -webkit-text-fill-color:var(--gold-2);">❤</span>
-            <span class="nm">Lavanya</span>
+            <span class="nm">Akash  ❤︎</span>
+            
+            <span class="nm">Harini</span>
           </span>
         </div>
         <svg class="orn reveal" style="--d:1" viewBox="0 0 260 22" fill="none" stroke="#e2bd58"><path d="M0 11H100M160 11H260"/><path d="M130 2l9 9-9 9-9-9z" fill="#e2bd58"/></svg>
@@ -667,7 +697,7 @@
         <div class="h-script gold reveal" style="font-size:clamp(34px,9vw,96px)"><span class="lightbar">All Come &amp; Bless Us</span></div>
         <svg class="orn reveal" style="--d:1" viewBox="0 0 260 22" fill="none" stroke="#e2bd58"><path d="M0 11H100M160 11H260"/><path d="M130 2l9 9-9 9-9-9z" fill="#e2bd58"/></svg>
         <p class="lead reveal" style="--d:2">Your presence and blessings will make our wedding day truly complete. With joyful hearts we invite you and your family to celebrate this special moment with us. Every smile, every wish and every prayer will be treasured for a lifetime.</p>
-        <div class="sign gold reveal n" style="--d:3">Akash &amp; Lavanya</div>
+        <div class="sign gold reveal n" style="--d:3">Akash &amp; Harini</div>
       </div>
     </section>
     <footer class="d">12 · 12 · 2026</footer>
@@ -759,7 +789,7 @@
 
     document.querySelectorAll('[data-photo]').forEach(el=>{
       const k = el.dataset.photo;
-      const labels = {couple:['AKASH & LAVANYA',220],venue:['NK MAHAL',40]};
+      const labels = {couple:['AKASH & HARINI',220],venue:['NK MAHAL',40]};
       setPhoto(el, CONFIG.photos[k], labels[k][0], labels[k][1]);
     });
 
@@ -1191,4 +1221,4 @@
     }, {passive:true});
   </script>
 </body>
-</html>   
+</html>
