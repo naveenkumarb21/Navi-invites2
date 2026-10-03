@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#040a1c">
-  <title>Vikram weds Priya · Wedding Invitation</title>
+  <title>Vikram weds Lavanya · Wedding Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -48,6 +48,48 @@
       animation:shine 6s linear infinite;
     }
     @keyframes shine{0%{background-position:100% 0}100%{background-position:-150% 0}}
+
+    /* ================== MUSIC BUTTON ================== */
+    .mute-btn{
+      position:fixed;
+      top:clamp(10px,2vh,20px);
+      right:clamp(10px,2vw,20px);
+      width:clamp(38px,6vw,46px);
+      height:clamp(38px,6vw,46px);
+      border-radius:50%;
+      border:1px solid rgba(226,189,88,.75);
+      background:rgba(4,10,28,.55);
+      -webkit-backdrop-filter:blur(6px);
+      backdrop-filter:blur(6px);
+      color:var(--gold-1);
+      font-family:var(--display);
+      font-size:clamp(15px,2.4vw,20px);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      z-index:200;
+      transition:background .4s,color .4s,box-shadow .4s,transform .4s;
+      padding:0;
+    }
+    .mute-btn:hover,.mute-btn:focus-visible{
+      background:var(--gold-grad);
+      color:var(--navy-0);
+      box-shadow:0 0 22px rgba(226,189,88,.6);
+      outline:none;
+      transform:scale(1.06);
+    }
+    .mute-btn .ico-off{display:none}
+    .mute-btn.muted .ico-on{display:none}
+    .mute-btn.muted .ico-off{display:inline}
+    .mute-btn:not(.muted)::after{
+      content:"";
+      position:absolute;
+      inset:-6px;
+      border-radius:50%;
+      border:1px solid rgba(226,189,88,.35);
+      animation:breathe 3s ease-in-out infinite;
+      pointer-events:none;
+    }
 
     /* ================== INTRO ================== */
     :root{--bowup:94px;--bowdown:104px}
@@ -103,10 +145,8 @@
       word-break:break-word;
     }
     .i-orn{margin:14px auto;width:min(280px,66vw);height:20px}
-    /* Cover names — stack vertically on phones, inline on larger */
     .i-names{font-family:var(--script);font-size:clamp(40px,min(13vw,11vh),128px);line-height:1.05;padding:0 8px}
     .i-names small{font-size:.42em;display:inline-block;margin:0 .15em;vertical-align:middle}
-    /* Mobile: stack 3 lines, centered */
     @media(max-width:600px){
       .i-names{
         display:flex;
@@ -171,7 +211,6 @@
     @supports not (min-height: 100dvh){
       section{min-height:100vh}
     }
-    /* Vertical gold connector between sections (kept, just visible) */
     section+section::before{content:"";position:absolute;top:0;left:50%;width:1px;height:60px;background:linear-gradient(var(--gold-2),transparent);opacity:.7}
     .wrap{width:100%;max-width:min(1000px,100%);margin:0 auto;padding:0}
 
@@ -296,13 +335,11 @@
     .in .lightbar::after,.lightbar.in::after{animation:bar 2.2s ease-out 1s 1}
     @keyframes bar{0%{left:-30%;opacity:1}100%{left:120%;opacity:1}}
 
-    /* ===== MOBILE: reduce section gap ===== */
     @media(max-width:600px){
       :root{
         --sec-pad-y:clamp(36px,7vh,60px);
       }
       section{min-height:auto;padding:var(--sec-pad-y) var(--pad)}
-      /* keep the connector visible but short */
       section+section::before{height:36px}
     }
 
@@ -321,6 +358,17 @@
   </style>
 </head>
 <body class="locked">
+
+  <!-- ============ BACKGROUND MUSIC ============ -->
+  <audio id="bgm" loop preload="auto" playsinline>
+    <source src="invimusic.mp3" type="audio/mpeg">
+  </audio>
+  <button id="muteBtn" class="mute-btn" type="button" aria-label="Toggle music">
+    <span class="ico-on">♪</span>
+    <span class="ico-off">✕</span>
+  </button>
+  <!-- =========================================== -->
+
   <canvas id="sparkles" aria-hidden="true"></canvas>
   <div id="flash"></div>
   <canvas id="confetti" aria-hidden="true"></canvas>
@@ -339,7 +387,7 @@
         <div class="i-names gold">
           <span>Vikram</span>
           <small>weds</small>
-          <span>Priya</span>
+          <span>Lavanya</span>
         </div>
       </div>
       <div class="bot-half">
@@ -358,7 +406,11 @@
     <!-- WELCOME (text removed) -->
     <section id="welcome">
       <div class="wrap">
-        <div class="big-names gold reveal" style="--d:0"><span class="lightbar">Vikram <small>weds</small> Priya</span></div>
+        <div class="big-names gold reveal" style="--d:0">
+          <span class="lightbar" style="white-space:nowrap;">
+            Vikram <span style="color:var(--gold-2); -webkit-text-fill-color:var(--gold-2); font-size:0.75em; vertical-align:middle;">❤</span> Lavanya
+          </span>
+        </div>
         <svg class="orn reveal" style="--d:1" viewBox="0 0 260 22" fill="none" stroke="#e2bd58"><path d="M0 11H100M160 11H260"/><path d="M130 2l9 9-9 9-9-9z" fill="#e2bd58"/></svg>
         <div class="couple frame reveal" style="--d:2"><div class="photo" data-photo="couple"></div></div>
       </div>
@@ -469,7 +521,7 @@
         <div class="h-script gold reveal" style="font-size:clamp(34px,9vw,96px)"><span class="lightbar">All Come &amp; Bless Us</span></div>
         <svg class="orn reveal" style="--d:1" viewBox="0 0 260 22" fill="none" stroke="#e2bd58"><path d="M0 11H100M160 11H260"/><path d="M130 2l9 9-9 9-9-9z" fill="#e2bd58"/></svg>
         <p class="lead reveal" style="--d:2">Your presence and blessings will make our wedding day truly complete. With joyful hearts we invite you and your family to celebrate this special moment with us. Every smile, every wish and every prayer will be treasured for a lifetime.</p>
-        <div class="sign gold reveal" style="--d:3">Vikram &amp; Priya</div>
+        <div class="sign gold reveal" style="--d:3">Vikram &amp; Lavanya</div>
       </div>
     </section>
     <footer>12 · 12 · 2026</footer>
@@ -478,6 +530,7 @@
   <script>
     /* ================= EDIT CONTENT HERE =================
        All images are JPEG → extension ".jpeg"
+       Background music → invimusic.mp3
        Files sit NEXT TO index.html in the same folder.
        ===================================================== */
     const CONFIG = {
@@ -490,9 +543,45 @@
       marriageTime: "6:00 – 7:30",
       busStop: "Anna Nagar Bus Stop",
       mapQuery: "NK Mahal Marriage Hall, Anna Nagar, Chennai",
-      slideSeconds: 4
+      slideSeconds: 4,
+      musicVolume: 0.55   // 0.0 → 1.0
     };
     /* ==================================================== */
+
+    /* ============ Background music ============ */
+    const bgm = document.getElementById('bgm');
+    const muteBtn = document.getElementById('muteBtn');
+    bgm.volume = CONFIG.musicVolume;
+
+    function playMusic(){
+      if(!bgm) return;
+      bgm.volume = 0;
+      bgm.play().then(()=>{
+        muteBtn.classList.remove('muted');
+        // gentle fade-in
+        let v = 0;
+        const target = CONFIG.musicVolume;
+        const fade = setInterval(()=>{
+          v = Math.min(target, v + 0.02);
+          bgm.volume = v;
+          if(v >= target) clearInterval(fade);
+        }, 80);
+      }).catch(err=>{
+        console.warn("Audio play failed:", err);
+        muteBtn.classList.add('muted');
+      });
+    }
+    function toggleMusic(){
+      if(bgm.paused){
+        bgm.play().then(()=>muteBtn.classList.remove('muted')).catch(()=>{});
+      } else {
+        bgm.pause();
+        muteBtn.classList.add('muted');
+      }
+    }
+    muteBtn.addEventListener('click', toggleMusic);
+    muteBtn.classList.add('muted');
+    /* ========================================== */
 
     function placeholder(label, hue){
       const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'>
@@ -524,7 +613,7 @@
 
     document.querySelectorAll('[data-photo]').forEach(el=>{
       const k = el.dataset.photo;
-      const labels = {couple:['VIKRAM & PRIYA',220],venue:['NK MAHAL',40]};
+      const labels = {couple:['VIKRAM & LAVANYA',220],venue:['NK MAHAL',40]};
       setPhoto(el, CONFIG.photos[k], labels[k][0], labels[k][1]);
     });
 
@@ -607,8 +696,12 @@
     function heart(x,y,s,a,rot){
       cx.save(); cx.translate(x,y); cx.rotate(rot);
       const g = cx.createLinearGradient(0,-s,0,s);
-      g.addColorStop(0,`rgba(255,240,180,${a})`); g.addColorStop(1,`rgba(214,168,60,${a})`);
-      cx.fillStyle = g; cx.shadowColor = `rgba(255,214,110,${a})`; cx.shadowBlur = s*2.2;
+      // white gradient for hearts
+      g.addColorStop(0,`rgba(255,255,255,${a})`); 
+      g.addColorStop(1,`rgba(220,220,255,${a})`);
+      cx.fillStyle = g; 
+      cx.shadowColor = `rgba(255,255,255,${a})`; 
+      cx.shadowBlur = s*2.2;
       cx.beginPath();
       cx.moveTo(0,s*.9);
       cx.bezierCurveTo(-s*1.3,-s*.1,-s*.6,-s*1.1,0,-s*.35);
@@ -623,11 +716,15 @@
         const a = (Math.sin(p.ph*3)+1)/2*.7+.15;
         if(p.glow){
           const g = cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*9);
-          g.addColorStop(0,`rgba(255,226,140,${a*.5})`); g.addColorStop(1,'rgba(255,226,140,0)');
+          g.addColorStop(0,`rgba(255,255,255,${a*.5})`); // white glow
+          g.addColorStop(1,'rgba(255,255,255,0)');
           cx.fillStyle=g; cx.beginPath(); cx.arc(p.x,p.y,p.r*9,0,6.283); cx.fill();
         }
         if(p.heart) heart(p.x, p.y, p.r*2.6+3, a, Math.sin(p.ph)*.25);
-        else { cx.fillStyle=`rgba(240,205,110,${a})`; cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fill(); }
+        else { 
+          cx.fillStyle=`rgba(255,255,255,${a})`; // white dots
+          cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fill(); 
+        }
       }
       if(!reduce) requestAnimationFrame(frame);
     }
@@ -913,6 +1010,7 @@
     let observer, opened = false;
     document.getElementById('openBtn').addEventListener('click', ()=>{
       if(opened) return; opened = true;
+      playMusic();
       document.body.classList.add('cine');
       intro.classList.add('untie');
       R.t = 0; R.start = performance.now();
